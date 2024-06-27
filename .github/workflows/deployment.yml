@@ -1,0 +1,53 @@
+name: Deploy Project
+#This workflow is triggered on push events (It is possible to limit the event to certain branches)
+on: push
+
+#All workflows jobs are executed in parallel by default
+jobs:
+  test:
+      #Runs job on ubuntu virtual machine
+    runs-on: ubuntu-latest
+    steps:
+
+      #Download the code from the repository
+      #Mandatory for the server to be able to run the code, install dependencies, etc
+      - name: Get Code
+
+        # Uses the specified action (we provide the identifier and the version after the "@") defined in the repository
+        # If we wanted to run a shell command we would use "run" instead of "uses"
+        uses: actions/checkout@v3
+
+        #Provide parameters for the action
+        #with:
+        #  ...
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+    
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy
+        run: echo "Deploying..."
