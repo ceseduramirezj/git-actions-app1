@@ -1,0 +1,10 @@
+name: Output Information
+on: workflow_dispatch
+jobs:
+    info:
+        runs-on: ubuntu-latest
+        steps:
+            #Empleamos funciones de github y objetos de github
+            #Mostramos estos datos de forma dinamica
+            - name: Output GitHub Context
+              run: echo "${{ toJson(github) }}"

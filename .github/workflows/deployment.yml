@@ -1,5 +1,5 @@
 name: Deploy Project
-#This workflow is triggered on push events (It is possible to limit the event to certain branches)
+#This workflow is triggered on push events (It is possible to limit the event to certain branches) or manually through the github website(workflow_dispatch)
 #We can have multiple triggers for this workflow
 on: [push, workflow_dispatch]
 
