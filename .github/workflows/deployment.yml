@@ -33,6 +33,9 @@ jobs:
         run: npm test
     
   deploy:
+    #Must finish successfully the specified job for the deployment to be executed
+    #This way jobs can run sequentially instead of in parallel
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
